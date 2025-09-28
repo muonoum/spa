@@ -15,19 +15,27 @@ pub fn main() -> Nil {
 }
 
 pub fn click_test() {
+  let button = query.element(query.tag("button"))
+
   app.simulate()
   |> simulate.start(uri.empty)
-  |> simulate.event(query.element(query.tag("button")), "click", [])
+  |> simulate.event(button, "click", [])
   |> format_simulation
   |> birdie.snap("click")
 }
 
 fn format_simulation(app: simulate.Simulation(model, message)) -> String {
-  let rendered = simulate.view(app) |> element.to_string
+  let view =
+    simulate.view(app)
+    |> element.to_string
+
   let history =
-    list.map(simulate.history(app), format_event)
+    simulate.history(app)
+    |> list.map(format_event)
     |> string.join("\n")
-  string.join([rendered, "---", history], "\n")
+
+  [view, "---", history]
+  |> string.join("\n")
 }
 
 fn format_event(event: simulate.Event(message)) -> String {
