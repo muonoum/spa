@@ -6,10 +6,6 @@ start:
 build:
 	gleam run -m lustre/dev build app
 
-.PHONY: test
-test:
-	gleam test
-
 .PHONY: snapshot
 snapshot:
 	gleam run -m birdie
