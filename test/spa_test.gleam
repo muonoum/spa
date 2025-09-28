@@ -40,9 +40,11 @@ fn format_simulation(app: simulate.Simulation(model, message)) -> String {
 fn format_event(event: simulate.Event(message)) -> String {
   let parts = case event {
     simulate.Dispatch(message:) -> ["message", string.inspect(message)]
+
     simulate.Event(target:, name:, data:) -> {
       ["event", query.to_readable_string(target), name, json.to_string(data)]
     }
+
     simulate.Problem(name:, message:) -> {
       ["problem", name, string.inspect(message)]
     }
