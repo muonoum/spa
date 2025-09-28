@@ -24,8 +24,10 @@ pub fn click_test() {
 
 fn format_simulation(app: simulate.Simulation(model, message)) -> String {
   let rendered = simulate.view(app) |> element.to_string
-  let history = list.map(simulate.history(app), format_event)
-  string.join([rendered, string.join(history, "\n")], "\n")
+  let history =
+    list.map(simulate.history(app), format_event)
+    |> string.join("\n")
+  string.join([rendered, history], "\n")
 }
 
 fn format_event(event: simulate.Event(message)) -> String {
@@ -33,11 +35,9 @@ fn format_event(event: simulate.Event(message)) -> String {
 
   case event {
     simulate.Dispatch(message:) -> ["message", string.inspect(message)]
-
     simulate.Event(target:, name:, data:) -> {
       ["event", query.to_readable_string(target), name, json.to_string(data)]
     }
-
     simulate.Problem(name:, message:) -> {
       ["problem", name, string.inspect(message)]
     }
