@@ -21,8 +21,7 @@ pub fn home_page_test() {
 }
 
 fn snapshot(app: simulate.Simulation(model, message)) -> String {
-  let output =
-    simulate.view(app) |> element.to_string |> string.replace("\n", "")
+  let output = simulate.view(app) |> element.to_string
 
   let history =
     list.map(simulate.history(app), format_event)
