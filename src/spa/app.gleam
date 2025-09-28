@@ -19,7 +19,7 @@ pub opaque type Message {
 }
 
 pub fn new() -> lustre.App(Uri, Model, Message) {
-  lustre.application(init, update, view)
+  lustre.application(init:, update:, view:)
 }
 
 pub fn simulate() -> simulate.App(Uri, Model, Message) {
