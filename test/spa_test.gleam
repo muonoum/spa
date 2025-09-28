@@ -27,7 +27,7 @@ fn format_simulation(app: simulate.Simulation(model, message)) -> String {
   let history =
     list.map(simulate.history(app), format_event)
     |> string.join("\n")
-  string.join([rendered, history], "\n")
+  string.join([rendered, "---", history], "\n")
 }
 
 fn format_event(event: simulate.Event(message)) -> String {
