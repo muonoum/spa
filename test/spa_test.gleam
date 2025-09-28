@@ -2,14 +2,33 @@ import birdie
 import gleam/json
 import gleam/list
 import gleam/string
+import gleam/uri
 import gleeunit
 import lustre/dev/query
 import lustre/dev/simulate
 import lustre/element
+import spa/app
+import spa/pages
 import spa/pages/home
 
 pub fn main() -> Nil {
   gleeunit.main()
+}
+
+pub fn app_test() {
+  app.simulate()
+  |> simulate.start(uri.empty)
+  |> simulate.event(query.element(query.tag("button")), "click", [])
+  |> snapshot
+  |> birdie.snap("app root click")
+}
+
+pub fn pages_test() {
+  pages.simulate()
+  |> simulate.start(uri.empty)
+  |> simulate.event(query.element(query.tag("button")), "click", [])
+  |> snapshot
+  |> birdie.snap("pages root click")
 }
 
 pub fn home_page_test() {

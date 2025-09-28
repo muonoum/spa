@@ -1,4 +1,5 @@
 import gleam/uri.{type Uri}
+import lustre/dev/simulate
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import spa/pages/home
@@ -12,6 +13,10 @@ pub type Message {
   HomeMessage(home.Message)
 }
 
+pub fn simulate() -> simulate.App(Uri, Model, Message) {
+  simulate.application(init:, update:, view:)
+}
+
 pub fn init(uri: Uri) -> #(Model, Effect(Message)) {
   case uri.path_segments(uri.path) {
     [] -> {
@@ -23,7 +28,7 @@ pub fn init(uri: Uri) -> #(Model, Effect(Message)) {
   }
 }
 
-pub fn update(model: Model, _uri: Uri, message: Message) {
+pub fn update(model: Model, message: Message) {
   case model, message {
     HomePage(model), HomeMessage(message) -> {
       let #(model, effect) = home.update(model, message)
@@ -34,7 +39,7 @@ pub fn update(model: Model, _uri: Uri, message: Message) {
   }
 }
 
-pub fn view(model: Model, _uri: Uri) -> Element(Message) {
+pub fn view(model: Model) -> Element(Message) {
   case model {
     HomePage(model) -> element.map(home.view(model), HomeMessage)
     NotFound(_uri) -> element.none()

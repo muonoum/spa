@@ -1,15 +1,12 @@
 import gleam/bool
 import gleam/uri.{type Uri}
 import lustre
+import lustre/dev/simulate
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import modem
 import spa/pages
 import spa/shared
-
-pub fn new() -> lustre.App(Uri, Model, Message) {
-  lustre.application(init, update, view)
-}
 
 pub opaque type Model {
   Model(uri: Uri, shared: shared.Model, page: pages.Model)
@@ -19,6 +16,14 @@ pub opaque type Message {
   UriChanged(Uri)
   SharedMessage(shared.Message)
   PageMessage(pages.Message)
+}
+
+pub fn new() -> lustre.App(Uri, Model, Message) {
+  lustre.application(init, update, view)
+}
+
+pub fn simulate() -> simulate.App(Uri, Model, Message) {
+  simulate.application(init:, update:, view:)
 }
 
 fn init(uri: Uri) -> #(Model, Effect(Message)) {
@@ -68,7 +73,7 @@ fn update(model: Model, message: Message) -> #(Model, Effect(Message)) {
 
     PageMessage(message) -> {
       let #(page, page_effect) = {
-        let #(model, effect) = pages.update(model.page, model.uri, message)
+        let #(model, effect) = pages.update(model.page, message)
         #(model, effect.map(effect, PageMessage))
       }
 
@@ -78,5 +83,5 @@ fn update(model: Model, message: Message) -> #(Model, Effect(Message)) {
 }
 
 fn view(model: Model) -> Element(Message) {
-  element.map(pages.view(model.page, model.uri), PageMessage)
+  element.map(pages.view(model.page), PageMessage)
 }

@@ -1,0 +1,8 @@
+---
+version: 1.4.0
+title: pages root click
+file: ./test/spa_test.gleam
+test_name: pages_test
+---
+<button class="flex justify-center items-center w-screen h-screen bg-pink-200 text-pink-900 text-8xl text-shadow-sm cursor-pointer select-none">1</button>
+event,button,click,{}
