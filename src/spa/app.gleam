@@ -4,8 +4,8 @@ import lustre
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import modem
-import web/pages
-import web/shared
+import spa/pages
+import spa/shared
 
 pub fn new() -> lustre.App(Uri, Model, Message) {
   lustre.application(init, update, view)

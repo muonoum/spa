@@ -1,7 +1,7 @@
 import gleam/uri.{type Uri}
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
-import web/pages/home
+import spa/pages/home
 
 pub opaque type Model {
   Home(home.Model)

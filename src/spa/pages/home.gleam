@@ -3,7 +3,7 @@ import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import lustre/element/html
 import lustre/event
-import web/extra
+import spa/extra
 
 pub opaque type Model {
   Model(Int)

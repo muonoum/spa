@@ -1,7 +1,7 @@
 import gleam/uri
 import lustre
 import plinth/browser/window
-import web/app
+import spa/app
 
 pub fn main() {
   let app = app.new()

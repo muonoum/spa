@@ -1,4 +1,4 @@
-name = "web"
+name = "spa"
 version = "1.0.0"
 target = "javascript"
 
