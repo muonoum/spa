@@ -14,7 +14,7 @@ pub opaque type Message {
   Increment
 }
 
-pub fn simulate() -> simulate.App(Int, Model, Message) {
+pub fn simulate() -> simulate.App(Nil, Model, Message) {
   simulate.application(init:, update:, view:)
 }
 

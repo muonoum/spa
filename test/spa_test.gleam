@@ -14,7 +14,7 @@ pub fn main() -> Nil {
 
 pub fn home_page_test() {
   home.simulate()
-  |> simulate.start(0)
+  |> simulate.start(Nil)
   |> simulate.event(query.element(query.tag("button")), "click", [])
   |> snapshot
   |> birdie.snap("home page click")
