@@ -1,8 +1,8 @@
 ---
 version: 1.4.0
-title: home click
+title: click
 file: ./test/spa_test.gleam
-test_name: home_test
+test_name: click_test
 ---
 <button class="flex justify-center items-center w-screen h-screen bg-pink-200 text-pink-900 text-8xl text-shadow-sm cursor-pointer select-none">1</button>
 event,button,click,{}

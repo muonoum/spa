@@ -8,35 +8,17 @@ import lustre/dev/query
 import lustre/dev/simulate
 import lustre/element
 import spa/app
-import spa/pages
-import spa/pages/home
 
 pub fn main() -> Nil {
   gleeunit.main()
 }
 
-pub fn app_test() {
+pub fn click_test() {
   app.simulate()
   |> simulate.start(uri.empty)
   |> simulate.event(query.element(query.tag("button")), "click", [])
   |> snapshot
-  |> birdie.snap("app click")
-}
-
-pub fn pages_test() {
-  pages.simulate()
-  |> simulate.start(uri.empty)
-  |> simulate.event(query.element(query.tag("button")), "click", [])
-  |> snapshot
-  |> birdie.snap("pages click")
-}
-
-pub fn home_test() {
-  home.simulate()
-  |> simulate.start(Nil)
-  |> simulate.event(query.element(query.tag("button")), "click", [])
-  |> snapshot
-  |> birdie.snap("home click")
+  |> birdie.snap("click")
 }
 
 fn snapshot(app: simulate.Simulation(model, message)) -> String {
