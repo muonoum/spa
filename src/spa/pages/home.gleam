@@ -7,7 +7,7 @@ import lustre/event
 import spa/extra
 
 pub opaque type Model {
-  Model(Int)
+  Model(count: Int)
 }
 
 pub opaque type Message {
@@ -19,20 +19,16 @@ pub fn simulate() -> simulate.App(Nil, Model, Message) {
 }
 
 pub fn init(_args) -> #(Model, Effect(Message)) {
-  #(Model(0), effect.none())
+  #(Model(count: 0), effect.none())
 }
 
 pub fn update(model: Model, message: Message) -> #(Model, Effect(Message)) {
-  let Model(count) = model
-
   case message {
-    Increment -> #(Model(count + 1), effect.none())
+    Increment -> #(Model(count: model.count + 1), effect.none())
   }
 }
 
 pub fn view(model: Model) -> Element(Message) {
-  let Model(count) = model
-
   html.button(
     [
       event.on_click(Increment),
@@ -42,8 +38,6 @@ pub fn view(model: Model) -> Element(Message) {
         "cursor-pointer select-none",
       ]),
     ],
-    [
-      element.text(int.to_string(count)),
-    ],
+    [element.text(int.to_string(model.count))],
   )
 }

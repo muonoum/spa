@@ -20,7 +20,7 @@ pub fn simulate() -> simulate.App(Uri, Model, Message) {
 pub fn init(uri: Uri) -> #(Model, Effect(Message)) {
   case uri.path_segments(uri.path) {
     [] -> {
-      let #(model, effect) = home.init(uri)
+      let #(model, effect) = home.init(Nil)
       #(HomePage(model), effect.map(effect, HomeMessage))
     }
 
@@ -41,7 +41,7 @@ pub fn update(model: Model, message: Message) {
 
 pub fn view(model: Model) -> Element(Message) {
   case model {
-    HomePage(model) -> element.map(home.view(model), HomeMessage)
+    HomePage(model) -> home.view(model) |> element.map(HomeMessage)
     NotFound(_uri) -> element.none()
   }
 }
