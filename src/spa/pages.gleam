@@ -4,7 +4,7 @@ import lustre/element.{type Element}
 import spa/pages/home
 
 pub opaque type Model {
-  Home(home.Model)
+  HomePage(home.Model)
   NotFound(Uri)
 }
 
@@ -16,7 +16,7 @@ pub fn init(uri: Uri) -> #(Model, Effect(Message)) {
   case uri.path_segments(uri.path) {
     [] -> {
       let #(model, effect) = home.init(uri)
-      #(Home(model), effect.map(effect, HomeMessage))
+      #(HomePage(model), effect.map(effect, HomeMessage))
     }
 
     _else -> #(NotFound(uri), effect.none())
@@ -25,9 +25,9 @@ pub fn init(uri: Uri) -> #(Model, Effect(Message)) {
 
 pub fn update(model: Model, _uri: Uri, message: Message) {
   case model, message {
-    Home(model), HomeMessage(message) -> {
+    HomePage(model), HomeMessage(message) -> {
       let #(model, effect) = home.update(model, message)
-      #(Home(model), effect.map(effect, HomeMessage))
+      #(HomePage(model), effect.map(effect, HomeMessage))
     }
 
     NotFound(..), _message -> #(model, effect.none())
@@ -36,7 +36,7 @@ pub fn update(model: Model, _uri: Uri, message: Message) {
 
 pub fn view(model: Model, _uri: Uri) -> Element(Message) {
   case model {
-    Home(model) -> element.map(home.view(model), HomeMessage)
+    HomePage(model) -> element.map(home.view(model), HomeMessage)
     NotFound(_uri) -> element.none()
   }
 }
