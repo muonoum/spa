@@ -20,7 +20,7 @@ pub fn app_test() {
   |> simulate.start(uri.empty)
   |> simulate.event(query.element(query.tag("button")), "click", [])
   |> snapshot
-  |> birdie.snap("app root click")
+  |> birdie.snap("app click")
 }
 
 pub fn pages_test() {
@@ -28,15 +28,15 @@ pub fn pages_test() {
   |> simulate.start(uri.empty)
   |> simulate.event(query.element(query.tag("button")), "click", [])
   |> snapshot
-  |> birdie.snap("pages root click")
+  |> birdie.snap("pages click")
 }
 
-pub fn home_page_test() {
+pub fn home_test() {
   home.simulate()
   |> simulate.start(Nil)
   |> simulate.event(query.element(query.tag("button")), "click", [])
   |> snapshot
-  |> birdie.snap("home page click")
+  |> birdie.snap("home click")
 }
 
 fn snapshot(app: simulate.Simulation(model, message)) -> String {
