@@ -22,12 +22,8 @@ pub fn home_page_test() {
 
 fn snapshot(app: simulate.Simulation(model, message)) -> String {
   let output = simulate.view(app) |> element.to_string
-
-  let history =
-    list.map(simulate.history(app), format_event)
-    |> string.join("\n")
-
-  string.join([output, history], "\n")
+  let history = list.map(simulate.history(app), format_event)
+  string.join([output, string.join(history, "\n")], "\n")
 }
 
 fn format_event(event: simulate.Event(message)) -> String {
