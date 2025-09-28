@@ -22,7 +22,7 @@ pub fn home_page_test() {
 
 fn snapshot(app: simulate.Simulation(model, message)) -> String {
   let output =
-    simulate.view(app) |> element.to_readable_string |> string.replace("\n", "")
+    simulate.view(app) |> element.to_string |> string.replace("\n", "")
 
   let history =
     list.map(simulate.history(app), format_event)
@@ -36,8 +36,7 @@ fn format_event(event: simulate.Event(message)) -> String {
     simulate.Dispatch(message:) -> "message: " <> string.inspect(message)
 
     simulate.Event(target:, name:, data:) ->
-      "event: "
-      <> [query.to_readable_string(target), name, json.to_string(data)]
+      ["event", query.to_readable_string(target), name, json.to_string(data)]
       |> string.join(",")
 
     simulate.Problem(name:, message:) ->
