@@ -5,6 +5,7 @@ import spa/app
 
 pub fn main() {
   let app = app.new()
-  let assert Ok(uri) = uri.parse(window.location()) as "uri"
-  let assert Ok(_) = lustre.start(app, "#app", uri) as "app"
+  let assert Ok(uri) = uri.parse(window.location()) as "parse uri"
+  let assert Ok(_runtime) = lustre.start(app, "#app", uri)
+    as "start application"
 }
