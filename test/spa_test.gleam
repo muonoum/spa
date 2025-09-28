@@ -22,9 +22,9 @@ pub fn click_test() {
 }
 
 fn snapshot(app: simulate.Simulation(model, message)) -> String {
-  let output = simulate.view(app) |> element.to_string
+  let rendered = simulate.view(app) |> element.to_string
   let history = list.map(simulate.history(app), format_event)
-  string.join([output, string.join(history, "\n")], "\n")
+  string.join([rendered, string.join(history, "\n")], "\n")
 }
 
 fn format_event(event: simulate.Event(message)) -> String {
