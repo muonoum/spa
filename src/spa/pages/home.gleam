@@ -1,4 +1,5 @@
 import gleam/int
+import lustre/dev/simulate
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import lustre/element/html
@@ -13,7 +14,11 @@ pub opaque type Message {
   Increment
 }
 
-pub fn init(_args) -> #(Model, Effect(f)) {
+pub fn simulate() -> simulate.App(Int, Model, Message) {
+  simulate.application(init:, update:, view:)
+}
+
+pub fn init(_args) -> #(Model, Effect(Message)) {
   #(Model(0), effect.none())
 }
 

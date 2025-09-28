@@ -13,7 +13,7 @@ pub fn main() -> Nil {
 }
 
 pub fn home_page_test() {
-  simulate.application(init: home.init, update: home.update, view: home.view)
+  home.simulate()
   |> simulate.start(0)
   |> simulate.event(query.element(query.tag("button")), "click", [])
   |> snapshot
