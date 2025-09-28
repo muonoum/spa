@@ -8,7 +8,6 @@ import lustre/dev/query
 import lustre/dev/simulate
 import lustre/element
 import spa/app
-import spa/extra
 
 pub fn main() -> Nil {
   gleeunit.main()
@@ -39,9 +38,7 @@ fn format_simulation(app: simulate.Simulation(model, message)) -> String {
 }
 
 fn format_event(event: simulate.Event(message)) -> String {
-  use <- extra.return(string.join(_, ","))
-
-  case event {
+  let parts = case event {
     simulate.Dispatch(message:) -> ["message", string.inspect(message)]
     simulate.Event(target:, name:, data:) -> {
       ["event", query.to_readable_string(target), name, json.to_string(data)]
@@ -50,4 +47,6 @@ fn format_event(event: simulate.Event(message)) -> String {
       ["problem", name, string.inspect(message)]
     }
   }
+
+  string.join(parts, ",")
 }
