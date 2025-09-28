@@ -20,7 +20,7 @@ pub fn home_page_test() {
   |> birdie.snap("home page click")
 }
 
-fn snapshot(app) {
+fn snapshot(app: simulate.Simulation(model, message)) -> String {
   let output =
     simulate.view(app) |> element.to_readable_string |> string.replace("\n", "")
 
@@ -31,7 +31,7 @@ fn snapshot(app) {
   string.join([output, history], "\n")
 }
 
-fn format_event(event: simulate.Event(a)) -> String {
+fn format_event(event: simulate.Event(message)) -> String {
   case event {
     simulate.Dispatch(message:) -> "message: " <> string.inspect(message)
 
