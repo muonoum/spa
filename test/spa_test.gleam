@@ -18,11 +18,11 @@ pub fn click_test() {
   app.simulate()
   |> simulate.start(uri.empty)
   |> simulate.event(query.element(query.tag("button")), "click", [])
-  |> snapshot
+  |> format_simulation
   |> birdie.snap("click")
 }
 
-fn snapshot(app: simulate.Simulation(model, message)) -> String {
+fn format_simulation(app: simulate.Simulation(model, message)) -> String {
   let rendered = simulate.view(app) |> element.to_string
   let history = list.map(simulate.history(app), format_event)
   string.join([rendered, string.join(history, "\n")], "\n")
