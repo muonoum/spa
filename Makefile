@@ -4,7 +4,7 @@ start:
 
 .PHONY: build
 build:
-	gleam run -m lustre/dev build app
+	gleam run -m lustre/dev build spa
 
 .PHONY: snapshot
 snapshot:
