@@ -16,4 +16,4 @@ birdie = ">= 1.4.0 and < 2.0.0"
 
 [tools.lustre.bin]
 bun = "system"
-tailwind = "system"
+tailwindcss = "system"
