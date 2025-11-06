@@ -1,5 +1,4 @@
 import gleam/uri.{type Uri}
-import lustre/dev/simulate
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import spa/pages/home
@@ -12,10 +11,6 @@ pub opaque type Model {
 
 pub type Message {
   HomeMessage(home.Message)
-}
-
-pub fn simulate() -> simulate.App(Uri, Model, Message) {
-  simulate.application(init:, update:, view:)
 }
 
 pub fn init(uri: Uri) -> #(Model, Effect(Message)) {
