@@ -11,8 +11,7 @@ snapshot:
 	gleam run -m birdie
 
 .PHONY: commit
-commit_message = $(shell echo $(message) | xargs)
-commit: message ?= $(shell git diff --name-only --cached | xargs basename)
+commit: commit_message ?= $(shell git diff --name-only --cached | rev | cut -d/ -f 1,2 | rev | xargs)
 commit:
 	test -n "$(commit_message)"
 	git commit -m "$(commit_message)"
