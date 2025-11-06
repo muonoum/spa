@@ -5,6 +5,7 @@ import lustre/element.{type Element}
 import lustre/element/html
 import lustre/event
 import spa/extra
+import spa/shared
 
 pub opaque type Model {
   Model(count: Int)
@@ -26,6 +27,10 @@ pub fn update(model: Model, message: Message) -> #(Model, Effect(Message)) {
   case message {
     Increment -> #(Model(count: model.count + 1), effect.none())
   }
+}
+
+pub fn from_shared(model: Model, _shared: shared.Model) -> Model {
+  model
 }
 
 pub fn view(model: Model) -> Element(Message) {

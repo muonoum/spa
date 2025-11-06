@@ -3,6 +3,7 @@ import lustre/dev/simulate
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
 import spa/pages/home
+import spa/shared
 
 pub opaque type Model {
   HomePage(home.Model)
@@ -39,9 +40,16 @@ pub fn update(model: Model, message: Message) {
   }
 }
 
+pub fn from_shared(model: Model, shared: shared.Model) -> Model {
+  case model {
+    HomePage(page) -> HomePage(home.from_shared(page, shared))
+    NotFound(..) -> model
+  }
+}
+
 pub fn view(model: Model) -> Element(Message) {
   case model {
     HomePage(model) -> home.view(model) |> element.map(HomeMessage)
-    NotFound(_uri) -> element.none()
+    NotFound(..) -> element.none()
   }
 }

@@ -34,6 +34,7 @@ fn init(uri: Uri) -> #(Model, Effect(Message)) {
 
   let #(page, page_effect) = {
     let #(model, effect) = pages.init(uri)
+    let model = pages.from_shared(model, shared)
     #(model, effect.map(effect, PageMessage))
   }
 
@@ -68,7 +69,8 @@ fn update(model: Model, message: Message) -> #(Model, Effect(Message)) {
         #(model, effect.map(effect, SharedMessage))
       }
 
-      #(Model(..model, shared:), shared_effect)
+      let page = pages.from_shared(model.page, shared)
+      #(Model(..model, shared:, page:), shared_effect)
     }
 
     PageMessage(message) -> {
